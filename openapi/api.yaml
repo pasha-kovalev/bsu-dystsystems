@@ -1,0 +1,180 @@
+openapi: 3.0.1
+info:
+  title: Image REST API
+  version: "1.0"
+x-yc-apigateway:
+  service_account_id: aje223bpa4l6s9omgj3j
+
+paths:
+  /images/{id}:
+    put:
+      tags:
+      - image-controller
+      summary: Обновление изображения
+      description: Обновляет изображение по указанному id
+      operationId: updateImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Изображение успешно загружено
+          content:
+            application/json: {}
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: bba81riip4224a2p317b
+  /images:
+    post:
+      tags:
+      - image-controller
+      summary: Загрузка изображения
+      description: Загружает изображение и возвращает его идентификатор
+      operationId: uploadImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Изображение успешно загружено
+          content:
+            application/json: {}
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: bba81riip4224a2p317b
+  /images/{imageId}:
+    get:
+      tags:
+      - image-controller
+      summary: Получение изображения
+      description: Возвращает изображение по его идентификатору
+      operationId: getImage
+      parameters:
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Изображение найдено
+          content:
+            image/jpeg: {}
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: bba81riip4224a2p317b
+    delete:
+      tags:
+      - image-controller
+      summary: Удаление изображения
+      description: Удаляет изображение по его идентификатору
+      operationId: deleteImage
+      parameters:
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: string
+      x-yc-apigateway-integration:
+        type: serverless_containers
+        container_id: bba81riip4224a2p317b
+      responses:
+        "204":
+          description: Изображение успешно удалено
+          content:
+            '*/*':
+              schema:
+                type: string
+                enum:
+                - 100 CONTINUE
+                - 101 SWITCHING_PROTOCOLS
+                - 102 PROCESSING
+                - 103 EARLY_HINTS
+                - 103 CHECKPOINT
+                - 200 OK
+                - 201 CREATED
+                - 202 ACCEPTED
+                - 203 NON_AUTHORITATIVE_INFORMATION
+                - 204 NO_CONTENT
+                - 205 RESET_CONTENT
+                - 206 PARTIAL_CONTENT
+                - 207 MULTI_STATUS
+                - 208 ALREADY_REPORTED
+                - 226 IM_USED
+                - 300 MULTIPLE_CHOICES
+                - 301 MOVED_PERMANENTLY
+                - 302 FOUND
+                - 302 MOVED_TEMPORARILY
+                - 303 SEE_OTHER
+                - 304 NOT_MODIFIED
+                - 305 USE_PROXY
+                - 307 TEMPORARY_REDIRECT
+                - 308 PERMANENT_REDIRECT
+                - 400 BAD_REQUEST
+                - 401 UNAUTHORIZED
+                - 402 PAYMENT_REQUIRED
+                - 403 FORBIDDEN
+                - 404 NOT_FOUND
+                - 405 METHOD_NOT_ALLOWED
+                - 406 NOT_ACCEPTABLE
+                - 407 PROXY_AUTHENTICATION_REQUIRED
+                - 408 REQUEST_TIMEOUT
+                - 409 CONFLICT
+                - 410 GONE
+                - 411 LENGTH_REQUIRED
+                - 412 PRECONDITION_FAILED
+                - 413 PAYLOAD_TOO_LARGE
+                - 413 REQUEST_ENTITY_TOO_LARGE
+                - 414 URI_TOO_LONG
+                - 414 REQUEST_URI_TOO_LONG
+                - 415 UNSUPPORTED_MEDIA_TYPE
+                - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+                - 417 EXPECTATION_FAILED
+                - 418 I_AM_A_TEAPOT
+                - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+                - 420 METHOD_FAILURE
+                - 421 DESTINATION_LOCKED
+                - 422 UNPROCESSABLE_ENTITY
+                - 423 LOCKED
+                - 424 FAILED_DEPENDENCY
+                - 425 TOO_EARLY
+                - 426 UPGRADE_REQUIRED
+                - 428 PRECONDITION_REQUIRED
+                - 429 TOO_MANY_REQUESTS
+                - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+                - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+                - 500 INTERNAL_SERVER_ERROR
+                - 501 NOT_IMPLEMENTED
+                - 502 BAD_GATEWAY
+                - 503 SERVICE_UNAVAILABLE
+                - 504 GATEWAY_TIMEOUT
+                - 505 HTTP_VERSION_NOT_SUPPORTED
+                - 506 VARIANT_ALSO_NEGOTIATES
+                - 507 INSUFFICIENT_STORAGE
+                - 508 LOOP_DETECTED
+                - 509 BANDWIDTH_LIMIT_EXCEEDED
+                - 510 NOT_EXTENDED
+                - 511 NETWORK_AUTHENTICATION_REQUIRED
+components: {}

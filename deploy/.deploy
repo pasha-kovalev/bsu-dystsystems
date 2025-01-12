@@ -1,0 +1,11 @@
+yc sls container revisions deploy \
+  --folder-id ${FOLDER_ID} \
+  --container-id ${IMAGES_API_CONTAINER_ID} \
+  --memory 512M \
+  --cores 1 \
+  --execution-timeout 5s \
+  --concurrency 4 \
+  --environment AWS_ACCESS_KEY_ID=,AWS_SECRET_ACCESS_KEY= \
+  --service-account-id ${IMAGES_API_SA_ID} \
+  --image ${IMAGES_API_REPOSITORY_NAME}:0.0.1
+

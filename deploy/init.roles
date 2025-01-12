@@ -1,0 +1,19 @@
+yc resource-manager folder add-access-binding ${FOLDER_ID} \
+  --role storage.admin \
+  --subject serviceAccount:${IMAGES_API_SA_ID}
+
+yc resource-manager folder add-access-binding ${FOLDER_ID} \
+  --role functions.admin \
+  --subject serviceAccount:${IMAGES_API_SA_ID}
+
+yc resource-manager folder add-access-binding ${FOLDER_ID} \
+  --role lockbox.payloadViewer \
+  --subject serviceAccount:${IMAGES_API_SA_ID}
+
+yc resource-manager folder add-access-binding ${FOLDER_ID} \
+  --role container-registry.images.puller \
+  --subject serviceAccount:${IMAGES_API_SA_ID}
+
+yc resource-manager folder add-access-binding ${FOLDER_ID} \
+  --role serverless.containers.invoker \
+  --subject serviceAccount:${IMAGES_API_SA_ID}
